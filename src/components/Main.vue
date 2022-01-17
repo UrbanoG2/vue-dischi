@@ -2,19 +2,26 @@
     <div>
         <div class="main-container">
             <div class="cards-container">
-                <div class="card"
+                <Album class="card"
                     v-for="(album, index) in thumbs"
-                    :key="index">
-                    <div class="card-img">
+                    :key="index"
+                    :poster="album.poster"
+                    :title="album.title"
+                    :author="album.author"
+                    :date="album.year">
+                        <!-- <div class="card-img">
                         <img :src="album.poster" alt="">
                     </div>
+                    
+                    <div class="card-text">
+                        <h2>{{ album.title }}</h2>
 
-                    <h2>{{ album.title }}</h2>
+                        <h4>{{ album.author }}</h4>
 
-                    <h4>{{ album.author }}</h4>
-
-                    <h4>1988</h4>
-                </div>
+                        <h4>1988</h4>
+                    </div> -->
+                    
+                </Album>
 
             </div>
         </div>
@@ -24,9 +31,13 @@
 <script>
 
 import axios from "axios";
+import Album from "./Album.vue"
 
 export default {
     name:"Main",
+    components : {
+        Album,
+    },
 
     data (){
         return {
@@ -69,30 +80,30 @@ export default {
                 height: 250px;
                 background-color:  #2E3A46;
 
-                .card-img {
-                    overflow: hidden;
+                // .card-img {
+                //     overflow: hidden;
                     
-                    img {
-                        width: 100%;
-                        padding: 1.5em;
-                    }
-                }
+                //     img {
+                //         width: 100%;
+                //         padding: 1.5em;
+                //     }
+                // }
 
-                h2 {
-                    color: white;
-                    text-transform: uppercase;
-                    text-align: center;
-                    font-size: 1em;
-                    margin-top: 3%;
-                }
+                // h2 {
+                //     color: white;
+                //     text-transform: uppercase;
+                //     text-align: center;
+                //     font-size: 1em;
+                //     margin-top: 3%;
+                // }
 
-                h4,
-                h4 {
-                    color: grey;
-                    text-align: center;
-                    text-transform: uppercase;
-                    font-size: 0.8em;
-                }
+                // h4,
+                // h4 {
+                //     color: grey;
+                //     text-align: center;
+                //     text-transform: uppercase;
+                //     font-size: 0.8em;
+                // }
             }
         }
     }
