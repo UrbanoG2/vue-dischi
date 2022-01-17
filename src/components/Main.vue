@@ -8,7 +8,7 @@
                     :poster="album.poster"
                     :title="album.title"
                     :author="album.author"
-                    :date="album.year">
+                    :year="album.year">
                         <!-- <div class="card-img">
                         <img :src="album.poster" alt="">
                     </div>
@@ -77,7 +77,7 @@ export default {
             .card {
                 width: calc(100% / 5 - 20px);
                 margin: 2% 0; 
-                height: 250px;
+                height: 300px;
                 background-color:  #2E3A46;
 
                 // .card-img {
