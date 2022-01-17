@@ -2,67 +2,49 @@
     <div>
         <div class="main-container">
             <div class="cards-container">
-                <div class="card">
+                <div class="card"
+                    v-for="(album, index) in thumbs"
+                    :key="index">
                     <div class="card-img">
-                        <img src="https://www.onstageweb.com/wp-content/uploads/2018/09/bon-jovi-new-jersey.jpg" alt="">
+                        <img :src="album.poster" alt="">
                     </div>
 
-                    <div class="title-album">
-                        <h2>New Jersey</h2>
-                    </div>
+                    <h2>{{ album.title }}</h2>
 
-                    <div class="artist">
-                        Bon Jovi
-                    </div>
+                    <h4>{{ album.author }}</h4>
 
-                    <div class="date">
-                        1988
-                    </div>
+                    <h4>1988</h4>
                 </div>
 
-                <div class="card">
-
-                </div>
-
-                <div class="card">
-
-                </div>
-
-                <div class="card">
-
-                </div>
-
-                <div class="card">
-
-                </div>
-
-                <div class="card">
-
-                </div>
-
-                <div class="card">
-
-                </div>
-
-                <div class="card">
-
-                </div>
-
-                <div class="card">
-
-                </div>
-
-                <div class="card">
-
-                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+
+import axios from "axios";
+
 export default {
     name:"Main",
+
+    data (){
+        return {
+            thumbs: null
+        }
+    },
+
+    mounted () {
+        axios
+        .get ("https://flynn.boolean.careers/exercises/api/array/music")
+        .then((response)=>{
+            this.thumbs = response.data.response;
+            console.log(this.thumbs);
+
+        }).catch ((error)=>{
+            console.log(error);
+        })
+    }
 }
 </script>
 
@@ -84,7 +66,7 @@ export default {
             .card {
                 width: calc(100% / 5 - 20px);
                 margin: 2% 0; 
-                height: 300px;
+                height: 250px;
                 background-color:  #2E3A46;
 
                 .card-img {
@@ -96,19 +78,20 @@ export default {
                     }
                 }
 
-                .title-album,
-                .artist,
-                .date {
+                h2 {
                     color: white;
                     text-transform: uppercase;
                     text-align: center;
-                    font-size: 0.8em;
+                    font-size: 1em;
                     margin-top: 3%;
                 }
 
-                .artist,
-                .date {
+                h4,
+                h4 {
                     color: grey;
+                    text-align: center;
+                    text-transform: uppercase;
+                    font-size: 0.8em;
                 }
             }
         }
