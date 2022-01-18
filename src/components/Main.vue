@@ -1,6 +1,18 @@
 <template>
     <div>
+        <div class="selection">
+            <select name="genre" id="genre">
+                <option value="" selected disabled hidden>All</option>
+                <option value="rock">Rock</option>
+                <option value="pop">Pop</option>
+                <option value="metal">Metal</option>
+                <option value="jazz">Jazz</option>
+            </select>
+        </div>
+
         <div class="main-container">
+
+            
             <div class="cards-container">
                 <Album class="card"
                     v-for="(album, index) in thumbs"
