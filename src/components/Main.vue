@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="selection">
+        <div class="genre-selection">
             <select @change="filterArray"
                     v-model="selectedGenre"
                     name="genre" id="genre">
@@ -9,6 +9,18 @@
                 <option value="pop">Pop</option>
                 <option value="metal">Metal</option>
                 <option value="jazz">Jazz</option>
+            </select>
+        </div>
+
+        <div class="artist-selection">
+            <select @change="filterArray"
+                    v-model="selectedArtist"
+                    name="artist" id="artist">
+                <option value="all">All</option>
+                <option value="iron maiden">Iron Maiden</option>
+                <option value="metallica">Metallica</option>
+                <option value="bon jovi">Bon Jovi</option>
+                <option value="queen">Queen</option>
             </select>
         </div>
 
@@ -58,6 +70,7 @@ export default {
             thumbs: null,
             selectArray: null,
             selectedGenre: "all",
+            selectedArtist: "all",
         }
     },
 
@@ -81,12 +94,16 @@ export default {
             
            //in base alla selezione del genere faccio un filter diverso
 
-           if (this.selectedGenre === "all") {
+           if (this.selectedGenre === "all" && this.selectedArtist === "all" ) {
                
                 return this.selectArray
 
-           } else {
-               this.selectArray = this.selectArray.filter((element) => element.genre.toLowerCase().includes(this.selectedGenre.toLowerCase()));
+           } else if (this.selectedGenre != "all"){ 
+                this.selectArray = this.selectArray.filter((element) => element.genre.toLowerCase().includes(this.selectedGenre.toLowerCase()));
+
+                
+           } else if (this.selectedArtist != "all") {
+               this.selectArray = this.selectArray.filter((element) => element.author.toLowerCase().includes(this.selectedArtist.toLowerCase()));
            }
         }
 
