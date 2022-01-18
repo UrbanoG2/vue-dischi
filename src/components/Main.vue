@@ -1,6 +1,19 @@
 <template>
     <div>
-        <div class="genre-selection">
+
+        <SearchGenre
+        
+            @selectGenre="filterArray ($event)" >
+            
+        </SearchGenre>
+
+        <!-- <SearchArtist
+
+            @selectArtist="filterArray ($event)" >
+
+        </SearchArtist> -->
+
+        <!-- <div class="genre-selection">
             <select @change="filterArray"
                     v-model="selectedGenre"
                     name="genre" id="genre">
@@ -10,7 +23,7 @@
                 <option value="metal">Metal</option>
                 <option value="jazz">Jazz</option>
             </select>
-        </div>
+        </div> -->
 
         <div class="artist-selection">
             <select @change="filterArray"
@@ -57,20 +70,25 @@
 <script>
 
 import axios from "axios";
-import Album from "./Album.vue"
+import Album from "./Album.vue";
+import SearchGenre from "./SearchGenre.vue";
+// import SearchArtist from "./SearchArtist.vue";
+
+
 
 export default {
     name:"Main",
     components : {
         Album,
+        SearchGenre,
+        // SearchArtist
     },
 
     data (){
         return {
             thumbs: null,
             selectArray: null,
-            selectedGenre: "all",
-            selectedArtist: "all",
+            selectedArtist:"all",
         }
     },
 
@@ -88,22 +106,22 @@ export default {
     },
 
     methods: {
-        filterArray () {
+        filterArray (genre) {
 
             this.selectArray = this.thumbs;
             
            //in base alla selezione del genere faccio un filter diverso
 
-           if (this.selectedGenre === "all" && this.selectedArtist === "all" ) {
+           if (genre === "all" && this.selectedArtist === "all" ) {
                
                 return this.selectArray
 
-           } else if (this.selectedGenre != "all"){ 
-                this.selectArray = this.selectArray.filter((element) => element.genre.toLowerCase().includes(this.selectedGenre.toLowerCase()));
+           } if (genre != "all"){ 
+                this.selectArray = this.selectArray.filter((element) => element.genre.toLowerCase().includes(genre.toLowerCase()));
 
                 
-           } else if (this.selectedArtist != "all") {
-               this.selectArray = this.selectArray.filter((element) => element.author.toLowerCase().includes(this.selectedArtist.toLowerCase()));
+           } if (this.selectedArtist != "all") {
+              this.selectArray = this.selectArray.filter((element) => element.this.selectedArtist.toLowerCase().includes(this.selectedArtist.toLowerCase()));
            }
         }
 
