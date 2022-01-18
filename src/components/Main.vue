@@ -1,8 +1,10 @@
 <template>
     <div>
         <div class="selection">
-            <select name="genre" id="genre">
-                <option value="" selected disabled hidden>All</option>
+            <select @change="filterArray"
+                    v-model="selectedGenre"
+                    name="genre" id="genre">
+                <option value="all">All</option>
                 <option value="rock">Rock</option>
                 <option value="pop">Pop</option>
                 <option value="metal">Metal</option>
@@ -15,7 +17,7 @@
             
             <div class="cards-container">
                 <Album class="card"
-                    v-for="(album, index) in thumbs"
+                    v-for="(album, index) in selectArray"
                     :key="index"
                     :poster="album.poster"
                     :title="album.title"
@@ -53,7 +55,9 @@ export default {
 
     data (){
         return {
-            thumbs: null
+            thumbs: null,
+            selectArray: null,
+            selectedGenre: "all",
         }
     },
 
@@ -62,12 +66,31 @@ export default {
         .get ("https://flynn.boolean.careers/exercises/api/array/music")
         .then((response)=>{
             this.thumbs = response.data.response;
-            console.log(this.thumbs);
+            this.selectArray = response.data.response;
+            console.log(this.thumbs, this.selectArray);
 
         }).catch ((error)=>{
             console.log(error);
         })
-    }
+    },
+
+    methods: {
+        filterArray () {
+
+            this.selectArray = this.thumbs;
+            
+           //in base alla selezione del genere faccio un filter diverso
+
+           if (this.selectedGenre === "all") {
+               
+                return this.selectArray
+
+           } else {
+               this.selectArray = this.selectArray.filter((element) => element.genre.toLowerCase().includes(this.selectedGenre.toLowerCase()));
+           }
+        }
+
+    },
 }
 </script>
 
